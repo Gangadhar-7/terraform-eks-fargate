@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-k8s-project
+  annotations:
+    kubernetes.io/ingress.class: "my-aws-ingress-class"
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-2016-08
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/subnets: subnet-06d35e1bbe0e39c0b,subnet-02bf93e126f7285eb
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:004468257635:certificate/6b116af7-a1c8-4173-8ce1-556f140e08ce
+    external-dns.alpha.kubernetes.io/hostname: eks-mumbai.recruitcrm.net
+spec:
+  rules:
+    - host: eks-mumbai.recruitcrm.net
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: myservice
+                port:
+                  number: 80   
+  
+          
+    # - host: argocd.gangadharrecruitcrm.shop
+    #   http:
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: argocd-server
+    #             port:
+    #               number: 32358
