@@ -154,6 +154,6 @@ resource "aws_cloudwatch_log_group" "eks_cluster" {
   retention_in_days = 30
 
   tags = {
-    Name = "mumbai-eks-cloudwatch-log-group"
+    Name = "${local.name}-cloudwatch-log-group"
   }
 }

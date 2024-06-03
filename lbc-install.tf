@@ -45,7 +45,7 @@ resource "helm_release" "loadbalancer_controller" {
 
   set {
     name  = "clusterName"
-    value = aws_eks_cluster.main.name
+    value = data.aws_eks_cluster_auth.cluster.name
   }
 
 }

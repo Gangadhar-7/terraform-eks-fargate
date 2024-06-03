@@ -9,7 +9,7 @@ resource "aws_iam_policy" "externaldns_iam_policy" {
     {
       "Effect": "Allow",
       "Action": [
-        "route53:ChangeResourceRecordSets"
+        "*"
       ],
       "Resource": [
         "arn:aws:route53:::hostedzone/*"
@@ -18,8 +18,7 @@ resource "aws_iam_policy" "externaldns_iam_policy" {
     {
       "Effect": "Allow",
       "Action": [
-        "route53:ListHostedZones",
-        "route53:ListResourceRecordSets"
+        "*"
       ],
       "Resource": [
         "*"
