@@ -10,7 +10,7 @@ resource "aws_iam_openid_connect_provider" "oidc_provider" {
 
   tags = merge(
     {
-      Name = "${local.name}-cluster-irsa"
+      Name = "${aws_eks_cluster.main.name}-cluster-irsa"
     },
   )
 }

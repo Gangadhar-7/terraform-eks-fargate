@@ -14,7 +14,7 @@ data "http" "lbc_iam_policy" {
 
 # Resource: Create AWS Load Balancer Controller IAM Policy 
 resource "aws_iam_policy" "lbc_iam_policy" {
-  name        = "${local.name}-AWSLoadBalancerControllerIAMPolicy"
+  name        = "${var.cluster_name}-AWSLoadBalancerControllerIAMPolicy"
   path        = "/"
   description = "AWS Load Balancer Controller IAM Policy"
   #policy = data.http.lbc_iam_policy.body
@@ -27,7 +27,7 @@ output "lbc_iam_policy_arn" {
 
 # Resource: Create IAM Role 
 resource "aws_iam_role" "lbc_iam_role" {
-  name = "${local.name}-lbc-iam-role"
+  name = "${var.cluster_name}-lbc-iam-role"
 
   # Terraform's "jsonencode" function converts a Terraform expression result to valid JSON syntax.
   assume_role_policy = jsonencode({

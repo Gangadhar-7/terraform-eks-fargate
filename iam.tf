@@ -38,7 +38,7 @@ EOF
 
 #cluster related roles and policies
 resource "aws_iam_role" "eks_cluster_role" {
-  name                  = "eks-eks-cluster-role"
+  name                  = "${var.cluster_name}_role"
   force_detach_policies = true
 
   assume_role_policy = <<POLICY
@@ -82,7 +82,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSCluserNLBPolicy" {
 
 #role for node group
 resource "aws_iam_role" "eks_node_group_role" {
-  name                  = "mumbai-eks-node-group-role"
+  name                  = "${var.cluster_name}-node-group-role"
   force_detach_policies = true
 
   assume_role_policy = <<POLICY
@@ -126,7 +126,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSFargatePodExecutionRolePolic
 
 #fargate pod execution role
 resource "aws_iam_role" "fargate_pod_execution_role" {
-  name                  = "mumbai-eks-fargate-pod-execution-role"
+  name                  = "${var.cluster_name}-fargate-pod-execution-role"
   force_detach_policies = true
 
   assume_role_policy = <<POLICY
@@ -150,10 +150,10 @@ POLICY
 
 #cloudwatch log group
 resource "aws_cloudwatch_log_group" "eks_cluster" {
-  name              = "/aws/eks/mumbai/cluster"
+  name              = "/aws/eks/${var.region}/${var.cluster_name}"
   retention_in_days = 30
 
   tags = {
-    Name = "${local.name}-cloudwatch-log-group"
+    Name = "${var.cluster_name}-cloudwatch-log-group"
   }
 }

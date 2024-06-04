@@ -1,3 +1,18 @@
+#cluster_name
+variable "cluster_name" {
+  description = "EKS Cluster Name"
+  type        = string
+  default     = "mumbai-eks-cluster"
+
+}
+
+#cluster_version
+variable "cluster_version" {
+  description = "EKS Cluster Version"
+  type        = string
+  default     = "1.30"
+}
+
 # VPC Name
 variable "vpc_name" {
   description = "VPC Name"
@@ -17,6 +32,13 @@ variable "region" {
   description = "AWS Region"
   type        = string
   default     = "ap-south-1"
+}
+
+#region_name 
+variable "region_name" {
+  description = "AWS Region Name"
+  type        = string
+  default     = "mumbai"
 }
 
 # vpc public subnets

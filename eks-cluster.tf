@@ -5,9 +5,9 @@ resource "aws_eks_cluster" "main" {
   enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
   vpc_config {
-    subnet_ids = var.public_subnets
+    subnet_ids              = var.public_subnets
     endpoint_private_access = false
-    endpoint_public_access = true
+    endpoint_public_access  = true
     public_access_cidrs     = var.cluster_endpoint_public_access_cidrs
   }
 
@@ -34,11 +34,11 @@ resource "aws_eks_node_group" "main" {
     min_size     = 1
   }
 
-  instance_types  = ["m5.large"]
+  instance_types = ["m5.large"]
 
   tags = {
-    Name        = "tf-eks-mumbai-node-group"
-    
+    Name = "tf-eks-mumbai-node-group"
+
   }
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
@@ -52,22 +52,22 @@ resource "aws_eks_node_group" "main" {
 
 output "cluster_id" {
   description = "EKS Cluster ID"
-  value       = aws_eks_cluster.main.id 
+  value       = aws_eks_cluster.main.id
 }
 
 output "cluster_certificate_authority_data" {
   description = "EKS Cluster Certificate Authority Data"
   value       = aws_eks_cluster.main.certificate_authority.0.data
-  
+
 }
 
 output "vpc_id" {
   description = "VPC ID"
-  value       = aws_eks_cluster.main.vpc_config.0.vpc_id 
+  value       = aws_eks_cluster.main.vpc_config.0.vpc_id
 }
 
 output "cluster_endpoint" {
   description = "EKS Cluster Endpoint"
   value       = aws_eks_cluster.main.endpoint
-  
+
 }
